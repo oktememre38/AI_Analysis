@@ -29,20 +29,22 @@ The page (`index.html`) reads `data.json`; nothing else in the repo changes duri
 
 ## Sources and how to read them
 
-Try `WebFetch` first. If a page comes back without the numbers (it draws them with JavaScript), install Playwright once and use the renderer:
+Try `WebFetch` first. If a page comes back without the numbers (it draws them with JavaScript) or with HTTP 403, use the renderer, which opens the page in a real headless browser:
 
 ```bash
-npm i --no-save playwright@1.49.1 && npx playwright install chromium
+npm i --no-save playwright@1.49.1
 node scripts/render.mjs https://livebench.ai/
 ```
 
-If neither works, mark the source stale and move on.
+`render.mjs` uses a Chromium already installed on the machine (it looks in `/opt/pw-browsers` first), so `npx playwright install` is usually not needed. Only if it reports that no browser exists, run `npx playwright install chromium` once and try again. Delete `node_modules` before committing.
+
+If neither works, mark the source stale and move on. In the final summary, name the exact error for each stale source (DNS failure means the domain must be added to the environment's network allowlist).
 
 | Key | Source | What to take |
 |---|---|---|
 | `aa` | https://artificialanalysis.ai/leaderboards/models | For every reasoning level of every family: Intelligence Index, cost per task, time per task (minutes). AA names levels like "Claude Opus 5.5 (high with fallback)"; ignore "with fallback". |
-| `lb` | https://livebench.ai/ | Overall score and "cost per successful task" per model. |
-| `ar` | https://arena.ai/leaderboard/text | Score per model. If several levels are listed, take the family's highest. Mark `(Prelim.)` entries with `arNote: "ön sonuç"`. |
+| `lb` | https://livebench.ai/ (tables are drawn by JavaScript; use `render.mjs`) | Overall score and "cost per successful task" per model. |
+| `ar` | https://arena.ai/leaderboard/text (WebFetch gets 403; use `render.mjs`) | Score per model. If several levels are listed, take the family's highest. Mark `(Prelim.)` entries with `arNote: "ön sonuç"`. |
 | `vals` | https://www.vals.ai/benchmarks/vals_index | Accuracy and cost per test from the leaderboard table. |
 | `opencode` | https://opencode.ai/zen/go/v1/models and https://opencode.ai/v2/docs/console/go | Which models are on Go, and the Go plan's monthly request estimate per model (`go`). |
 | `plans` | OpenAI help center (GPT-6 and other models, ChatGPT model selector), Claude support (plans and usage), Google AI plans / Gemini app help | Which plan reaches which model. Change `access` only when a source clearly says so; otherwise leave it. |
