@@ -34,7 +34,10 @@ const executablePath = findChromium();
 const browser = await chromium.launch({ executablePath, args: ["--no-sandbox"] });
 try {
   const page = await browser.newPage({ locale: "en-US" });
-  await page.goto(url, { waitUntil: "networkidle", timeout: 60000 });
+  // Some leaderboards keep a live connection open, so "networkidle" never comes:
+  // load the document, then give its scripts a fixed time to draw the table
+  await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+  await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => {});
   await page.waitForTimeout(Number(wait));
   console.log(await page.evaluate(() => document.body.innerText));
 } finally {

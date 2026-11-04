@@ -6,7 +6,9 @@ The page (`index.html`) reads `data.json`; nothing else in the repo changes duri
 ## Rules
 
 - Edit **only** `data.json`, then run `node scripts/sync-seed.mjs` (it copies the data into `index.html`). Never edit code, styles or these instructions.
+- Read every source on every run, even if an earlier run today already did. A source's status reflects this run only.
 - Never invent a number. If a value can't be read from its source, keep the old value.
+- `WebFetch` hands the page to a summarizer, which can drop or round numbers and cut long tables. For the numbers you store, read the raw page text yourself (`node scripts/render.mjs <url> > /tmp/page.txt`, then `grep`/read it) and use `WebFetch` only to find where things are.
 - If a whole source can't be read, keep all its old values and set that source's `status` to `"stale"` (leave its `date` at the last successful read).
 - When a source is read successfully, set its `status` to `"ok"` and its `date` to the date the source itself shows (its "last updated" date), or today if it shows none.
 - Always set `checked` to today. Set `updated` to today only if any number, model or access entry changed.
