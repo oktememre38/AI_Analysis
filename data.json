@@ -12,7 +12,7 @@
     "lb": {
       "label": "LiveBench",
       "date": "2026-10-25",
-      "status": "stale",
+      "status": "ok",
       "url": "https://livebench.ai/"
     },
     "ar": {
@@ -24,7 +24,7 @@
     "vals": {
       "label": "Vals Index",
       "date": "2026-10-30",
-      "status": "stale",
+      "status": "ok",
       "url": "https://www.vals.ai/benchmarks/vals_index"
     },
     "opencode": {
