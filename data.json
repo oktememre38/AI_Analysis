@@ -1,17 +1,17 @@
 {
   "schema": 1,
-  "checked": "2026-11-09",
-  "updated": "2026-11-09",
+  "checked": "2026-11-10",
+  "updated": "2026-11-10",
   "sources": {
     "aa": {
       "label": "Artificial Analysis",
-      "date": "2026-11-09",
+      "date": "2026-11-10",
       "status": "ok",
       "url": "https://artificialanalysis.ai/leaderboards/models"
     },
     "lb": {
       "label": "LiveBench",
-      "date": "2026-10-25",
+      "date": "2026-11-09",
       "status": "ok",
       "url": "https://livebench.ai/"
     },
@@ -23,13 +23,13 @@
     },
     "vals": {
       "label": "Vals Index",
-      "date": "2026-11-05",
+      "date": "2026-11-09",
       "status": "ok",
       "url": "https://www.vals.ai/benchmarks/vals_index"
     },
     "opencode": {
       "label": "OpenCode Go",
-      "date": "2026-11-09",
+      "date": "2026-11-10",
       "status": "ok",
       "url": "https://opencode.ai/v2/docs/console/go"
     },
@@ -40,8 +40,8 @@
       "url": "https://help.openai.com/en/articles/20001354-gpt-6-and-other-models"
     }
   },
-  "accessNotes": "ChatGPT Plus'ta GPT-6 Astra ve GPT-6.1 modelleri yalnızca ChatGPT Work ve Codex'te; Chat'te GPT-6 Pro yalnızca Pro planında. Claude Fable 5.1 Pro'da ek kullanım kredisiyle, Max'ta haftalık limitin yarısına kadar dahil. Gemini 4 Carbon henüz hiçbir tüketici aboneliğinde yok. Kesikli çerçeveli etiketler doğrulanamamış ya da kısıtlı erişimi gösterir; plan sayfalarından kontrol et.",
-  "caveats": "LMArena listesinin ilk 153 sırası alınabildi. GPT-6.1 Terra, Kimi K3.1 Pro ve MiniMax M3.1 Flash bu kısımda yok. LMArena'daki DeepSeek V4.1 Flash, AA'dakinden eski bir sürüm (0910). Vals, Claude Fable 5.1'i henüz index'e almamış. Her kaynağın kendi eğilimi var: LMArena üsluba, Vals finans işlerine, LiveBench uzun ajan görevlerine ağırlık veriyor.",
+  "accessNotes": "ChatGPT Plus'ta GPT-6 Astra ve GPT-6.1 modelleri yalnızca ChatGPT Work ve Codex'te; Chat'te GPT-6 Pro yalnızca Pro planında. Claude Fable 5.2 Pro'da ek kullanım kredisiyle, Max'ta haftalık limitin yarısına kadar dahil. Gemini 4 Carbon henüz hiçbir tüketici aboneliğinde yok. Kesikli çerçeveli etiketler doğrulanamamış ya da kısıtlı erişimi gösterir; plan sayfalarından kontrol et.",
+  "caveats": "LMArena (Cloudflare engeli nedeniyle okunamadı, eski değerler) listesinin ilk 153 sırası alınabildi. GPT-6.1 Terra, Kimi K3.1 Pro ve MiniMax M3.1 Flash bu kısımda yok. LMArena'daki DeepSeek V4.1 Flash, AA'dakinden eski bir sürüm (0910). Her kaynağın kendi eğilimi var: LMArena üsluba, Vals finans işlerine, LiveBench uzun ajan görevlerine ağırlık veriyor. LMArena'da Claude Fable 5.2 henüz yok.",
   "families": [
     {
       "name": "Claude Opus 5.5",
@@ -57,19 +57,19 @@
           "max",
           59,
           10.04,
-          25.4
+          25.1
         ],
         [
           "xhigh",
           57,
           6.05,
-          16.3
+          16.4
         ],
         [
           "high",
           52,
           3.46,
-          9.6
+          9.5
         ],
         [
           "medium",
@@ -81,7 +81,7 @@
           "low",
           35,
           0.98,
-          3.1
+          3
         ]
       ]
     },
@@ -99,25 +99,25 @@
           "max",
           55,
           10.02,
-          31.5
+          31.4
         ],
         [
           "xhigh",
           50,
           4.09,
-          15.3
+          15.1
         ],
         [
           "high",
           42,
           1.64,
-          7.2
+          7
         ],
         [
           "medium",
           31,
           0.78,
-          3.7
+          3.6
         ],
         [
           "low",
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "name": "Claude Fable 5.1",
+      "name": "Claude Fable 5.2",
       "maker": "anthropic",
       "access": [
         {
@@ -139,34 +139,34 @@
       ],
       "v": [
         [
-          "xhigh",
-          50,
-          10.85,
-          19.1
+          "max",
+          65,
+          26.54,
+          46.4
         ],
         [
-          "max",
-          49,
-          12.99,
-          22.7
+          "xhigh",
+          62,
+          14.83,
+          26.4
         ],
         [
           "high",
-          47,
-          7.54,
-          13.2
+          62,
+          9.08,
+          17.9
         ],
         [
           "medium",
-          43,
-          5.56,
-          9.7
+          56,
+          3.8,
+          8.3
         ],
         [
           "low",
-          39,
-          4.47,
-          7.4
+          54,
+          3.1,
+          6.5
         ]
       ]
     },
@@ -189,7 +189,7 @@
           "max",
           36,
           0.41,
-          16.2
+          14.8
         ],
         [
           "xhigh",
@@ -207,7 +207,7 @@
           "medium",
           25,
           0.09,
-          4.1
+          4
         ],
         [
           "low",
@@ -232,31 +232,31 @@
           "max",
           57,
           6.24,
-          22.2
+          23
         ],
         [
           "xhigh",
           55,
           3.66,
-          11.6
+          11.4
         ],
         [
           "high",
           55,
           3.24,
-          9.8
+          9.9
         ],
         [
           "medium",
           52,
           2.73,
-          6.9
+          6.8
         ],
         [
           "low",
           43,
           1.42,
-          3.6
+          3.8
         ]
       ]
     },
@@ -275,7 +275,7 @@
           "max",
           55,
           1.27,
-          19.9
+          19.7
         ],
         [
           "xhigh",
@@ -287,7 +287,7 @@
           "high",
           50,
           0.59,
-          6.5
+          6.4
         ],
         [
           "medium",
@@ -299,7 +299,7 @@
           "low",
           35,
           0.16,
-          1.8
+          1.7
         ]
       ]
     },
@@ -318,19 +318,19 @@
           "max",
           51,
           0.96,
-          13.5
+          13.6
         ],
         [
           "xhigh",
           45,
           0.4,
-          6.0
+          6
         ],
         [
           "high",
           42,
           0.26,
-          4.0
+          4
         ],
         [
           "medium",
@@ -342,7 +342,7 @@
           "non-reasoning",
           31,
           0.23,
-          2.2
+          2.3
         ],
         [
           "low",
@@ -371,13 +371,13 @@
           "max",
           28,
           0.15,
-          12.4
+          12.3
         ],
         [
           "xhigh",
           23,
           0.1,
-          7.2
+          7.1
         ],
         [
           "high",
@@ -389,7 +389,7 @@
           "medium",
           18,
           0.04,
-          3.4
+          3.3
         ],
         [
           "low",
@@ -401,7 +401,7 @@
           "non-reasoning",
           9,
           0.07,
-          2.1
+          2.2
         ]
       ]
     },
@@ -414,19 +414,19 @@
           "high",
           60,
           7.76,
-          28.7
+          26.4
         ],
         [
           "medium",
           58,
           6.59,
-          25.2
+          23.5
         ],
         [
           "low",
           54,
           7.19,
-          23.9
+          21.3
         ]
       ]
     },
@@ -450,7 +450,7 @@
           "high",
           50,
           9.95,
-          29.1
+          29.2
         ]
       ]
     },
@@ -469,13 +469,13 @@
           "high",
           31,
           7.77,
-          14.9
+          14.8
         ],
         [
           "medium",
           30,
           6.26,
-          12.0
+          12.1
         ],
         [
           "low",
@@ -504,13 +504,13 @@
           "max",
           33,
           0.6,
-          16.1
+          16.6
         ],
         [
           "high",
           29,
           0.46,
-          12.5
+          12.9
         ],
         [
           "non-reasoning",
@@ -536,6 +536,12 @@
           23,
           1.77,
           24.6
+        ],
+        [
+          "non-reasoning",
+          13,
+          0.98,
+          18
         ]
       ]
     },
@@ -554,7 +560,7 @@
           "",
           46,
           3.68,
-          38.1
+          37.7
         ]
       ]
     },
@@ -573,7 +579,7 @@
           "xhigh",
           35,
           7.77,
-          25.7
+          25.9
         ],
         [
           "high",
@@ -585,7 +591,7 @@
           "low",
           31,
           2.92,
-          10.7
+          10.9
         ]
       ]
     },
@@ -604,7 +610,7 @@
           "",
           34,
           10.02,
-          61.9
+          58.3
         ]
       ]
     },
@@ -623,13 +629,13 @@
           "max",
           32,
           5.01,
-          29.2
+          29.6
         ],
         [
           "low",
           23,
           1.57,
-          15.9
+          15.4
         ]
       ]
     },
@@ -648,7 +654,7 @@
           "",
           30,
           0.26,
-          39.2
+          37
         ]
       ]
     },
@@ -667,7 +673,7 @@
           "",
           29,
           0.49,
-          14.2
+          14.3
         ]
       ]
     },
@@ -686,7 +692,7 @@
           "",
           29,
           2.35,
-          13.9
+          14
         ]
       ]
     },
@@ -705,7 +711,7 @@
           "",
           28,
           0.58,
-          45.3
+          45.6
         ]
       ]
     },
@@ -724,7 +730,7 @@
           "",
           27,
           0.13,
-          62.2
+          64.2
         ]
       ]
     },
@@ -743,7 +749,7 @@
           "",
           19,
           1.29,
-          11.9
+          11.8
         ]
       ]
     },
@@ -763,7 +769,7 @@
           "",
           18,
           0.28,
-          2.3
+          2.1
         ]
       ]
     }
@@ -771,19 +777,19 @@
   "ext": {
     "Claude Opus 5.5": {
       "lb": [
-        85.1,
-        4.82
+        83.4,
+        6.723
       ],
       "ar": 1509,
       "vals": [
-        70.18,
+        70.14,
         24.77
       ]
     },
     "Claude Sonnet 5.5": {
       "lb": [
-        80,
-        4.14
+        77,
+        5.803
       ],
       "ar": 1477,
       "vals": [
@@ -791,17 +797,10 @@
         16.18
       ]
     },
-    "Claude Fable 5.1": {
-      "lb": [
-        85.7,
-        7.406
-      ],
-      "ar": 1504
-    },
     "Claude Haiku 5.5": {
       "lb": [
-        69.8,
-        0.905
+        68.9,
+        1.264
       ],
       "ar": 1425,
       "vals": [
@@ -811,8 +810,8 @@
     },
     "GPT-6 Astra": {
       "lb": [
-        85.6,
-        4.828
+        84.5,
+        5.318
       ],
       "ar": 1476,
       "vals": [
@@ -822,8 +821,8 @@
     },
     "GPT-6.1 Sol": {
       "lb": [
-        84.1,
-        0.819
+        81.4,
+        0.823
       ],
       "ar": 1481,
       "vals": [
@@ -833,8 +832,8 @@
     },
     "GPT-6.1 Terra": {
       "lb": [
-        77.8,
-        0.665
+        78.8,
+        0.673
       ],
       "vals": [
         60.54,
@@ -843,8 +842,8 @@
     },
     "GPT-6 Luna": {
       "lb": [
-        64.6,
-        0.124
+        60.4,
+        0.132
       ],
       "ar": 1441,
       "vals": [
@@ -862,19 +861,19 @@
     },
     "Gemini 4 Argon": {
       "lb": [
-        79.3,
-        1.916
+        77.7,
+        1.822
       ],
       "ar": 1520,
       "vals": [
-        69.24,
+        69.39,
         13.37
       ]
     },
     "Gemini 3.8 Flash": {
       "lb": [
-        59.2,
-        1.662
+        56,
+        1.637
       ],
       "ar": 1496,
       "arNote": "ön sonuç",
@@ -885,8 +884,8 @@
     },
     "DeepSeek V4.1 Flash": {
       "lb": [
-        72.9,
-        0.185
+        70.3,
+        0.195
       ],
       "ar": 1476,
       "arNote": "eski sürüm",
@@ -904,8 +903,8 @@
     },
     "Kimi K3.1 Pro": {
       "lb": [
-        71.3,
-        1.044
+        68.7,
+        1.074
       ],
       "vals": [
         62.52,
@@ -914,19 +913,19 @@
     },
     "Grok 4.7": {
       "lb": [
-        70.1,
-        2.913
+        67.9,
+        4.175
       ],
       "ar": 1441,
       "vals": [
-        58.56,
+        58.62,
         11.63
       ]
     },
     "Qwen3.8 Max": {
       "lb": [
-        61.6,
-        1.88
+        60.9,
+        2.015
       ],
       "ar": 1482,
       "vals": [
@@ -937,14 +936,14 @@
     "GLM-5.3": {
       "ar": 1481,
       "vals": [
-        59.73,
+        59.85,
         8.52
       ]
     },
     "MiMo-V2.6-Pro": {
       "lb": [
-        68.5,
-        0.183
+        66.1,
+        0.175
       ],
       "ar": 1480,
       "vals": [
@@ -954,8 +953,8 @@
     },
     "MiniMax M3.1 Flash": {
       "lb": [
-        66.9,
-        0.153
+        63.7,
+        0.173
       ],
       "vals": [
         53.78,
@@ -964,8 +963,8 @@
     },
     "Step 5 Preview": {
       "lb": [
-        58.6,
-        1.245
+        55.2,
+        1.349
       ],
       "ar": 1448,
       "vals": [
@@ -975,8 +974,8 @@
     },
     "GLM-5.3-Flash": {
       "lb": [
-        62.1,
-        0.163
+        60.7,
+        0.175
       ],
       "ar": 1477,
       "vals": [
@@ -999,6 +998,16 @@
       "vals": [
         43.42,
         null
+      ]
+    },
+    "Claude Fable 5.2": {
+      "lb": [
+        84.9,
+        9.85
+      ],
+      "vals": [
+        71.31,
+        17.94
       ]
     }
   }
