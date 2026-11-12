@@ -772,6 +772,92 @@
           2
         ]
       ]
+    },
+    {
+      "name": "Gemini 4 Hydrogen",
+      "maker": "google",
+      "access": [],
+      "v": [
+        [
+          "xhigh",
+          54,
+          3.16,
+          13
+        ],
+        [
+          "high",
+          51,
+          1.87,
+          6
+        ],
+        [
+          "medium",
+          41,
+          0.8,
+          3.7
+        ],
+        [
+          "low",
+          27,
+          0.29,
+          1.3
+        ]
+      ]
+    },
+    {
+      "name": "Tencent Hy4",
+      "maker": "other",
+      "access": [
+        {
+          "s": "opencode",
+          "t": 0
+        }
+      ],
+      "go": 13500,
+      "v": [
+        [
+          "",
+          35,
+          1.03,
+          14
+        ]
+      ]
+    },
+    {
+      "name": "Hy4 Preview",
+      "maker": "other",
+      "access": [
+        {
+          "s": "opencode",
+          "t": 0
+        }
+      ],
+      "go": 6770,
+      "v": []
+    },
+    {
+      "name": "Kimi K3",
+      "maker": "other",
+      "access": [
+        {
+          "s": "opencode",
+          "t": 0
+        }
+      ],
+      "go": 490,
+      "v": []
+    },
+    {
+      "name": "Muse Spark 1.3",
+      "maker": "other",
+      "access": [
+        {
+          "s": "opencode",
+          "t": 0
+        }
+      ],
+      "go": 226600,
+      "v": []
     }
   ],
   "ext": {
@@ -1012,6 +1098,40 @@
       "vals": [
         71.31,
         17.94
+      ]
+    },
+    "Gemini 4 Hydrogen": {
+      "vals": [
+        68.49,
+        9.84
+      ]
+    },
+    "Tencent Hy4": {
+      "vals": [
+        59.35,
+        1.72
+      ]
+    },
+    "Hy4 Preview": {
+      "vals": [
+        53.21,
+        1.57
+      ]
+    },
+    "Kimi K3": {
+      "lb": [
+        65,
+        2.17
+      ],
+      "vals": [
+        52.95,
+        7.17
+      ]
+    },
+    "Muse Spark 1.3": {
+      "lb": [
+        68.6,
+        1.416
       ]
     }
   }
