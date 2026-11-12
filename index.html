@@ -278,8 +278,9 @@ const ROWS = FAMILIES.flatMap(f => f.v.map(([effort, intel, cost, time]) => ({ .
 const EXT = DATA.ext;
 const NAMES = FAMILIES.map(f => f.name);
 const FAM_AA = Object.fromEntries(FAMILIES.map(f => {
+  // Models not yet scored by AA (v is empty) appear only in the source comparison table
   const b = f.v.slice().sort((a, b) => b[1] - a[1])[0];
-  return [f.name, { effort: b[0], intel: b[1], cost: b[2] }];
+  return [f.name, b ? { effort: b[0], intel: b[1], cost: b[2] ?? undefined } : { effort: null, intel: undefined, cost: undefined }];
 }));
 const METRICS = {
   intel: { label: "Zeka", lowerBetter: false, sources: [
@@ -339,9 +340,9 @@ function consensus(key) {
 }
 const CONS = { intel: consensus("intel"), cost: consensus("cost") };
 // Independent mode: each model takes the AA score found at its independent percentile; gaps between its reasoning levels stay as AA measured them
-const AA_SORTED = NAMES.map(n => FAM_AA[n].intel).sort((a, b) => a - b);
+const AA_SORTED = NAMES.map(n => FAM_AA[n].intel).filter(x => x != null).sort((a, b) => a - b);
 const atPct = p => { const x = p / 100 * (AA_SORTED.length - 1), i = Math.floor(x), j = Math.min(i + 1, AA_SORTED.length - 1); return AA_SORTED[i] + (AA_SORTED[j] - AA_SORTED[i]) * (x - i); };
-const SHIFT = Object.fromEntries(NAMES.map(n => [n, CONS.intel[n].med == null ? 0 : atPct(CONS.intel[n].med) - FAM_AA[n].intel]));
+const SHIFT = Object.fromEntries(NAMES.map(n => [n, CONS.intel[n].med == null || FAM_AA[n].intel == null ? 0 : atPct(CONS.intel[n].med) - FAM_AA[n].intel]));
 const intelOf = r => state.intelSrc === "ind" ? Math.max(0, r.intel + SHIFT[r.name]) : r.intel;
 const view = r => ({ ...r, aaIntel: r.intel, intel: intelOf(r) });
 
@@ -394,6 +395,7 @@ function pool() {
   if (!sel.length) return ROWS.slice();
   return FAMILIES.flatMap(f => {
     const vs = ROWS.filter(r => r.name === f.name);
+    if (!vs.length) return [];
     const hit = vs.filter(r => !r.effort || state.levels.includes(r.effort));
     if (hit.length) return hit;
     const dist = r => Math.min(...sel.map(s => Math.abs(LEVELS.indexOf(r.effort) - s)));

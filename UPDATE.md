@@ -16,13 +16,13 @@ The page (`index.html`) reads `data.json`; nothing else in the repo changes duri
 
 ## data.json shape
 
-- `families[]`: one entry per model that at least one of the user's subscriptions can reach (plus Gemini 4 Carbon as a reference with `access: []`).
+- `families[]`: one entry per model that at least one of the user's subscriptions can reach, plus new flagship models whose access isn't confirmed yet (`access: []`, e.g. Gemini 4 Carbon).
   - `maker`: `anthropic`, `openai`, `google`, `deepseek`, or `other` (everything else, e.g. OpenCode Go models).
   - `access[]`: `{ "s": subscription, "t": minimum tier, "note"?: short Turkish note }`.
     Subscriptions and tiers: `claude` (0 Pro, 1 Max), `chatgpt` (0 Free/Go, 1 Plus, 2 Pro), `gemini` (0 free, 1 AI Pro/Ultra), `deepseek` (0 free app), `opencode` (0 Go $10).
     A `note` marks limited or unverified access (e.g. `"Plus: Work/Codex"`, `"doğrulanmadı"`).
   - `go`: requests per month on the OpenCode Go $10 plan, or `"unlimited"`. Only for models on OpenCode Go.
-  - `v[]`: `[effort, intelligence, costPerTaskUSD, minutesPerTask]` per reasoning level. `effort` is one of `""` (model has no levels), `non-reasoning`, `low`, `medium`, `high`, `xhigh`, `max`. Use `null` for a value the source doesn't report.
+  - `v[]`: `[effort, intelligence, costPerTaskUSD, minutesPerTask]` per reasoning level. `effort` is one of `""` (model has no levels), `non-reasoning`, `low`, `medium`, `high`, `xhigh`, `max`. Use `null` for a value the source doesn't report. Leave `v` as `[]` when AA hasn't scored the model yet; the page then shows it only in the source comparison table. Fill `v` as soon as AA lists it.
 - `ext{}`: keyed by family name, independent sources. Leave a key out when the source doesn't list the model.
   - `lb`: `[LiveBench overall, cost per successful task USD]`
   - `ar`: LMArena text score (integer). `arNote`: short Turkish note such as `"ön sonuç"` (preliminary) or `"eski sürüm"` (arena lists an older snapshot than AA).
@@ -53,8 +53,16 @@ If neither works, mark the source stale and move on. In the final summary, name 
 
 ## Adding or removing models
 
-- Add a family when a new model becomes reachable through one of the subscriptions above and AA has scored it. Match its name to how AA writes it.
-- When a model leaves every subscription, set its `access` to `[]` instead of deleting it, unless AA has dropped it too.
+**Look for new models on every run.** Updating only the models already in `data.json` is not enough. After reading each source (`aa`, `lb`, `ar`, `vals`, `opencode`), list every model in it that has no family in `data.json` (compare names loosely: case, spaces, dashes, version suffixes, reasoning-level suffixes such as "(high)"). For each one, decide:
+
+- Add it as a family when it is reachable through one of the subscriptions above, or when it is a new model from Anthropic, OpenAI, Google or DeepSeek. **AA is not required**: a model that appears in any one source (AA, LiveBench, LMArena or Vals) is added. Use AA's spelling of the name if AA lists it, otherwise the maker's official name, and use that same name as the `ext` key.
+- Fill whatever the sources give: `v` from AA (or `[]` if AA doesn't have it), `ext` from LiveBench, LMArena and Vals. Never invent a number.
+- `access`: take it from the plan pages. If those can't be read, use the maker's official launch announcement (blog or model page found with WebSearch) when it clearly names who gets the model (e.g. "rolling out to free users of the Gemini app" → `gemini` t 0). If neither says, use `access: []` and mention it in the summary. Add `note: "doğrulanmadı"` when the wording is vague.
+- Skip models that are not reachable through any subscription and are not from those four makers (e.g. a lab's minor model only on its own API).
+
+In the final summary, always include a **"Yeni modeller"** line: what you added, and every unmatched name you skipped with a few words on why. Write "Yeni modeller: yok" if every source matched.
+
+- When a model leaves every subscription, set its `access` to `[]` instead of deleting it, unless every source has dropped it too.
 - A newer version that replaces an older one in a subscription (e.g. a new Sonnet) is a new family; set the old one's `access` to `[]`.
 
 ## Before you commit

@@ -47,7 +47,14 @@ for (const f of data.families || []) {
   }
   const onGo = (f.access || []).some(a => a.s === "opencode");
   if (onGo && !(f.go === "unlimited" || num(f.go, 1, 1e7))) err(`${at}.go must be a request count or "unlimited" for OpenCode Go models`);
-  if (!Array.isArray(f.v) || !f.v.length) { err(`${at}.v must list at least one setting`); continue; }
+  if (!Array.isArray(f.v)) { err(`${at}.v must be an array`); continue; }
+  if (!f.v.length) {
+    // Not scored by AA yet: allowed only if at least one independent source lists it
+    const e = data.ext?.[f.name];
+    if (!e || !(e.lb || e.ar != null || e.vals)) err(`${at}: v is empty and no independent source (lb, ar, vals) lists it`);
+    else warn(`${f.name}: no AA score yet (shown only in the source comparison)`);
+    continue;
+  }
   const seen = new Set();
   for (const v of f.v) {
     const [effort, intel, cost, time] = v;
