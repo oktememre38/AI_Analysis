@@ -255,7 +255,7 @@ img { max-width: 100%; }
 <script>
 // data.json is the live copy the daily job updates; the seed above is the same data, used when the file can't be fetched
 const SEED = JSON.parse(document.getElementById("seed").textContent);
-fetch("data.json", { cache: "no-store" }).then(r => r.ok ? r.json() : SEED).catch(() => SEED).then(start);
+fetch("data.json?t=" + Date.now(), { cache: "no-store" }).then(r => r.ok ? r.json() : SEED).catch(() => SEED).then(start);
 
 function start(DATA) {
 const MONTHS = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
