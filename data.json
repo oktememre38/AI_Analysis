@@ -40,7 +40,7 @@
       "url": "https://help.openai.com/en/articles/20001354-gpt-6-and-other-models"
     }
   },
-  "accessNotes": "ChatGPT Plus'ta GPT-6 Astra ve GPT-6.1 modelleri yalnızca ChatGPT Work ve Codex'te; Chat'te GPT-6 Pro yalnızca Pro planında. Claude Fable 5.2 Pro'da ek kullanım kredisiyle, Max'ta haftalık limitin yarısına kadar dahil. Gemini 4 Carbon henüz hiçbir tüketici aboneliğinde yok. Kesikli çerçeveli etiketler doğrulanamamış ya da kısıtlı erişimi gösterir; plan sayfalarından kontrol et.",
+  "accessNotes": "ChatGPT Plus'ta GPT-6 Astra ve GPT-6.1 modelleri yalnızca ChatGPT Work ve Codex'te; Chat'te GPT-6 Pro yalnızca Pro planında. Claude Fable 5.2 Pro'da ek kullanım kredisiyle, Max'ta haftalık limitin yarısına kadar dahil. Gemini 4 Carbon henüz hiçbir tüketici aboneliğinde yok. Gemini 4 Hydrogen ücretsiz Gemini uygulamasında yalnızca otomatik model seçimiyle geliyor. Kesikli çerçeveli etiketler doğrulanamamış ya da kısıtlı erişimi gösterir; plan sayfalarından kontrol et.",
   "caveats": "LMArena (Cloudflare engeli nedeniyle okunamadı, eski değerler) listesinin ilk 153 sırası alınabildi. GPT-6.1 Terra, Kimi K3.1 Pro ve MiniMax M3.1 Flash bu kısımda yok. LMArena'daki DeepSeek V4.1 Flash, AA'dakinden eski bir sürüm (0910). Her kaynağın kendi eğilimi var: LMArena üsluba, Vals finans işlerine, LiveBench uzun ajan görevlerine ağırlık veriyor. LMArena'da Claude Fable 5.2 henüz yok.",
   "families": [
     {
@@ -776,7 +776,13 @@
     {
       "name": "Gemini 4 Hydrogen",
       "maker": "google",
-      "access": [],
+      "access": [
+        {
+          "s": "gemini",
+          "t": 0,
+          "note": "ücretsizde otomatik seçim"
+        }
+      ],
       "v": [
         [
           "xhigh",
