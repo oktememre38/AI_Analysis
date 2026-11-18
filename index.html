@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Abonelik Model Seçici</title>
+<title>AI Model Seçici</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,8 +143,8 @@ img { max-width: 100%; }
   <header>
     <div>
       <div class="eyebrow">Zeka · maliyet · token tüketimi</div>
-      <h1>Abonelik Model Seçici</h1>
-      <p class="lede">Elindeki aboneliklerle erişebildiğin modelleri, Artificial Analysis Intelligence Index skoru ile görev başına maliyeti (harcanan token × fiyat) birlikte tartarak sıralar. Ağırlıkları değiştirip kendi önceliğine göre yeniden sırala.</p>
+      <h1>AI Model Seçici</h1>
+      <p class="lede">Seçtiğin geliştiricilerin modellerini, Artificial Analysis Intelligence Index skoru ile görev başına maliyeti (harcanan token × fiyat) birlikte tartarak sıralar. Ağırlıkları değiştirip kendi önceliğine göre yeniden sırala.</p>
     </div>
     <div class="stamp" id="stamp"></div>
   </header>
@@ -152,8 +152,8 @@ img { max-width: 100%; }
   <div class="grid">
     <aside class="rail" aria-label="Ayarlar">
       <section>
-        <h2>Aboneliklerim</h2>
-        <div id="subs"></div>
+        <h2>Geliştiriciler</h2>
+        <div id="makers"></div>
       </section>
       <section>
         <h2>Zeka kaynağı</h2>
@@ -177,7 +177,7 @@ img { max-width: 100%; }
       <section>
         <h2>Görünüm</h2>
         <label class="toggle"><input type="checkbox" id="opt-best"> <span>Her modelin seçili seviyeler içinde yalnızca en iyi ayarını göster</span></label>
-        <label class="toggle"><input type="checkbox" id="opt-all"> <span>Erişimim olmayan modelleri de gri olarak göster</span></label>
+        <label class="toggle"><input type="checkbox" id="opt-all"> <span>Seçmediğim geliştiricilerin modellerini de gri olarak göster</span></label>
         <label class="toggle"><input type="checkbox" id="opt-min"> <span>Zeka skoru 30'un altındakileri gizle</span></label>
       </section>
     </aside>
@@ -197,11 +197,10 @@ img { max-width: 100%; }
                 <th>#</th>
                 <th>Model</th>
                 <th><button data-sort="score">Skor</button></th>
-                <th>Nereden erişirim</th>
                 <th class="num"><button data-sort="intel">Zeka</button></th>
                 <th class="num"><button data-sort="cost">Görev başı $</button></th>
                 <th class="num"><button data-sort="time">Görev süresi</button></th>
-                <th class="num">Go aylık istek</th>
+                <th class="num">OpenCode Go aylık istek</th>
               </tr>
             </thead>
             <tbody id="rows"></tbody>
@@ -212,7 +211,7 @@ img { max-width: 100%; }
       <section class="panel">
         <div class="panel-head">
           <h2>Zeka ve maliyet haritası</h2>
-          <p>Sol üst köşe en iyisi. Kesikli çizgi: senin erişimindeki verimlilik sınırı.</p>
+          <p>Sol üst köşe en iyisi. Kesikli çizgi: seçili modellerdeki verimlilik sınırı.</p>
         </div>
         <svg id="chart" viewBox="0 0 900 440" role="img" aria-label="Görev başı maliyete karşı zeka skoru dağılım grafiği"></svg>
         <div class="legend" id="legend"></div>
@@ -233,11 +232,10 @@ img { max-width: 100%; }
       <section class="panel">
         <div class="panel-head"><h2>Nasıl hesaplanıyor</h2></div>
         <div class="notes">
-          <p><b>Zeka:</b> Artificial Analysis Intelligence Index (0–100). Aynı model farklı düşünme seviyelerinde (low, medium, high, xhigh, max) ayrı ölçülüyor; abonelikte bu seviyeyi genelde sen seçiyorsun.</p>
+          <p><b>Zeka:</b> Artificial Analysis Intelligence Index (0–100). Aynı model farklı düşünme seviyelerinde (low, medium, high, xhigh, max) ayrı ölçülüyor; kullanırken bu seviyeyi genelde sen seçiyorsun.</p>
           <p><b>Görev başı maliyet:</b> AA'nın index görevlerinde bir görevi çözmek için ortalama API maliyeti. Hem modelin token fiyatını hem de kaç token harcadığını içerir. Abonelikte doğrudan para ödemesen de kota tüketimin bu sayıyla orantılı: pahalı ayar, limitine daha hızlı ulaşır.</p>
           <p><b>Skor:</b> Zeka (en yüksek modele göre oranlanır), maliyet ve hız (ikisi de logaritmik ölçekte, ucuz ve hızlı olan 1'e yakın) puanlarının ağırlıklı ortalaması. Verisi eksik ölçüt nötr (0,5) sayılır ve tabloda tire ile gösterilir.</p>
           <p><b>Go aylık istek:</b> OpenCode Go $10 planında o model için ayda tahmini istek sayısı. 5 saatlik limit bunun %20'si, haftalık limit %50'si.</p>
-          <p><b>Erişim notları:</b> <span id="access-notes"></span></p>
           <p><b>Kaynak karşılaştırması:</b> Her kaynakta modeller kendi aralarında sıralanıp 0–100 yüzdelik sıraya çevrilir (100 = o kaynaktaki en iyi ya da en ucuz). "Bağımsız sıra" LiveBench, LMArena ve Vals'in ortancasıdır. AA'nın sırası bundan 20 puandan fazla saparsa işaretlenir. "Sıra uyumu" Spearman korelasyonu: 1 aynı sıra, 0 ilişki yok. Diğer kaynaklar düşünme seviyesi ayırmadığı için AA tarafında en yüksek skorlu ayar kullanılır.</p>
           <p><b>Bağımsız kaynaklar modu:</b> Her modelin skoru, bağımsız ortanca sırasına denk gelen AA skoruna kaydırılır. Aynı modelin seviyeleri arasındaki farklar AA'daki gibi kalır.</p>
           <p><b>Sınırlar:</b> <span id="caveats"></span></p>
@@ -261,14 +259,7 @@ function start(DATA) {
 const MONTHS = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 const trDate = iso => { const [y, m, d] = iso.split("-").map(Number); return d + " " + MONTHS[m - 1] + " " + y; };
 const srcDate = k => trDate(DATA.sources[k].date) + (DATA.sources[k].status === "ok" ? "" : " · son denemede okunamadı");
-const SUBS = {
-  claude:   { label: "Claude",      tiers: ["Pro", "Max"], def: 0 },
-  chatgpt:  { label: "ChatGPT",     tiers: ["Free / Go", "Plus", "Pro"], def: 1 },
-  gemini:   { label: "Gemini",      tiers: ["Ücretsiz", "AI Pro / Ultra"], def: 1 },
-  deepseek: { label: "DeepSeek",    tiers: ["Ücretsiz uygulama"], def: 0 },
-  opencode: { label: "OpenCode Go", tiers: ["Go ($10/ay)"], def: 0 },
-};
-const MAKERS = { anthropic: "Anthropic", openai: "OpenAI", google: "Google", deepseek: "DeepSeek", other: "Diğer (OpenCode Go)" };
+const MAKERS = { anthropic: "Claude (Anthropic)", openai: "GPT (OpenAI)", google: "Gemini (Google)", deepseek: "DeepSeek", other: "Diğer" };
 
 const FAMILIES = DATA.families.map(f => ({ ...f, go: f.go === "unlimited" ? Infinity : f.go }));
 
@@ -354,13 +345,13 @@ const PRESETS = [
 ];
 
 const DEFAULT = {
-  subs: Object.fromEntries(Object.entries(SUBS).map(([k, s]) => [k, { on: true, tier: s.def }])),
+  makers: Object.fromEntries(Object.keys(MAKERS).map(k => [k, true])),
   w: [60, 30, 10], best: false, all: false, min: false, sort: "score", levels: ["medium", "high"], intelSrc: "aa", cmp: "intel",
 };
 let state = structuredClone(DEFAULT);
 try {
   const saved = JSON.parse(localStorage.getItem("model-secici-v2") || "null");
-  if (saved && saved.subs) state = { ...state, ...saved, subs: { ...state.subs, ...saved.subs } };
+  if (saved) { state = { ...state, ...saved, makers: { ...state.makers, ...(saved.makers || {}) } }; delete state.subs; }
 } catch (e) {}
 const save = () => { try { localStorage.setItem("model-secici-v2",JSON.stringify(state)); } catch (e) {} };
 
@@ -372,9 +363,8 @@ const [TMIN, TMAX] = range("time");
 const IMAX = Math.max(...ROWS.map(r => r.intel));
 const IMAX_IND = Math.max(...ROWS.map(r => Math.max(0, r.intel + SHIFT[r.name])));
 
-function accessible(r) {
-  return r.access.filter(a => state.subs[a.s]?.on && state.subs[a.s].tier >= a.t);
-}
+// A model is shown when its developer is ticked in the rail
+const on = r => !!state.makers[r.maker];
 function score(r) {
   const [wi, wc, ws] = state.w; const sum = wi + wc + ws || 1;
   const i = r.intel / (state.intelSrc === "ind" ? IMAX_IND : IMAX);
@@ -405,8 +395,7 @@ function pool() {
 }
 
 function computed() {
-  let list = pool().map(view).map(r => ({ ...r, via: accessible(r), sc: score(r) }));
-  list.forEach(r => r.ok = r.via.length > 0);
+  let list = pool().map(view).map(r => ({ ...r, ok: on(r), sc: score(r) }));
   if (state.min) list = list.filter(r => r.intel >= 30);
   if (state.best) {
     const best = {};
@@ -423,16 +412,12 @@ function computed() {
 }
 
 function renderControls() {
-  $("subs").innerHTML = Object.entries(SUBS).map(([k, s]) => {
-    const st = state.subs[k];
-    const tierCtl = s.tiers.length > 1
-      ? `<select id="tier-${k}" aria-label="${s.label} planı">${s.tiers.map((t, i) => `<option value="${i}" ${i === st.tier ? "selected" : ""}>${t}</option>`).join("")}</select>`
-      : `<span class="fixed">${s.tiers[0]}</span>`;
-    return `<div class="sub ${st.on ? "" : "is-off"}" style="margin-bottom:8px"><input type="checkbox" id="sub-${k}" ${st.on ? "checked" : ""}><label for="sub-${k}">${s.label}</label>${tierCtl}</div>`;
+  $("makers").innerHTML = Object.entries(MAKERS).map(([k, l]) => {
+    const st = state.makers[k];
+    return `<div class="sub ${st ? "" : "is-off"}" style="margin-bottom:8px"><input type="checkbox" id="mk-${k}" ${st ? "checked" : ""}><label for="mk-${k}"><span class="dot" style="display:inline-block;margin-right:6px;background:var(--c-${k})"></span>${l}</label></div>`;
   }).join("");
-  Object.keys(SUBS).forEach(k => {
-    $("sub-" + k).onchange = e => { state.subs[k].on = e.target.checked; update(true); };
-    const sel = $("tier-" + k); if (sel) sel.onchange = e => { state.subs[k].tier = +e.target.value; update(); };
+  Object.keys(MAKERS).forEach(k => {
+    $("mk-" + k).onchange = e => { state.makers[k] = e.target.checked; update(true); };
   });
   $("presets").innerHTML = PRESETS.map(p => `<button class="chipbtn" data-p="${p.id}">${p.label}</button>`).join("");
   $("presets").querySelectorAll("button").forEach(b => b.onclick = () => {
@@ -466,14 +451,6 @@ function syncWeights() {
   });
 }
 
-function tags(r) {
-  if (!r.ok) {
-    const where = r.access.length ? r.access.map(a => SUBS[a.s].label + " " + SUBS[a.s].tiers[a.t]).join(", ") : "Tüketici aboneliğinde yok";
-    return `<span class="tag none">${where}</span>`;
-  }
-  return r.via.map(a => `<span class="tag ${a.note ? "note" : ""}" ${a.note ? `title="${a.note}"` : ""}>${SUBS[a.s].label}${a.note ? " · " + a.note : ""}</span>`).join("");
-}
-
 function renderTable(list) {
   const shown = state.all ? list : list.filter(r => r.ok);
   let n = 0;
@@ -483,32 +460,31 @@ function renderTable(list) {
       <td class="rank">${rank}</td>
       <td><div class="mname"><span class="dot" style="background:var(--c-${r.maker})"></span>${r.name}${r.effort ? `<span class="effort${r.fallback ? " fallback" : ""}"${r.fallback ? ' title="Bu model seçtiğin seviyede ölçülmemiş, en yakın seviye gösteriliyor"' : ""}>${r.effort}</span>` : ""}</div></td>
       <td><div class="scorecell"><span class="mono">${r.sc.toFixed(0)}</span><div class="bar"><i style="width:${r.sc.toFixed(1)}%"></i></div></div></td>
-      <td><div class="access">${tags(r)}</div></td>
       <td class="num mono">${Math.round(r.intel)}${state.intelSrc === "ind" && Math.round(r.intel) !== r.aaIntel ? ` <span class="pct">AA ${r.aaIntel}</span>` : ""}</td>
       <td class="num mono">${fmtCost(r.cost)}</td>
       <td class="num mono">${fmtTime(r.time)}</td>
-      <td class="num mono">${r.go != null && r.ok && r.via.some(a => a.s === "opencode") ? fmtGo(r.go) : '<span class="na">–</span>'}</td>
+      <td class="num mono">${r.go != null ? fmtGo(r.go) : '<span class="na">–</span>'}</td>
     </tr>`;
-  }).join("") || `<tr><td colspan="8" style="padding:24px;color:var(--muted)">Seçili abonelikle eşleşen model yok. Soldan en az bir abonelik işaretle.</td></tr>`;
+  }).join("") || `<tr><td colspan="7" style="padding:24px;color:var(--muted)">Seçili geliştiriciyle eşleşen model yok. Soldan en az bir geliştirici işaretle.</td></tr>`;
   const okCount = list.filter(r => r.ok).length;
-  $("count").textContent = `${okCount} erişilebilir ${state.best ? "model" : "model ayarı"} · ${({ score: "skora", intel: "zekaya", cost: "maliyete", time: "süreye" })[state.sort]} göre`;
+  $("count").textContent = `${okCount} ${state.best ? "model" : "model ayarı"} · ${({ score: "skora", intel: "zekaya", cost: "maliyete", time: "süreye" })[state.sort]} göre`;
   document.querySelector('th button[data-sort="intel"]').textContent = state.intelSrc === "ind" ? "Zeka (bağımsız)" : "Zeka";
   document.querySelectorAll("th button").forEach(b => b.dataset.sort === state.sort ? b.setAttribute("aria-sort", "descending") : b.removeAttribute("aria-sort"));
 }
 
 function renderPicks() {
-  // Picks always consider every accessible setting, independent of the table's view toggles
-  const ok = pool().map(view).map(r => ({ ...r, via: accessible(r), sc: score(r) })).filter(r => r.via.length);
+  // Picks always consider every setting of the ticked developers, independent of the table's view toggles
+  const ok = pool().map(view).filter(on).map(r => ({ ...r, sc: score(r) }));
   if (!ok.length) { $("picks").innerHTML = ""; return; }
   const by = (arr, f) => arr.slice().sort(f)[0];
   const top = by(ok, (a, b) => b.sc - a.sc);
   const smart = by(ok, (a, b) => b.intel - a.intel || (a.cost ?? 99) - (b.cost ?? 99));
   const cheapGood = by(ok.filter(r => r.intel >= 45 && r.cost != null), (a, b) => a.cost - b.cost);
   const daily = by(ok.filter(r => r.intel >= 35 && r.time != null && r.cost != null), (a, b) => (a.cost * a.time) - (b.cost * b.time));
-  const card = (eb, r, meta, lead) => r ? `<div class="pick ${lead ? "lead" : ""}"><div class="eyebrow">${eb}</div><div class="name">${label(r)}</div><div class="meta mono">${meta(r)}</div><div class="meta">${r.via.map(a => SUBS[a.s].label).join(" · ")}</div></div>` : "";
+  const card = (eb, r, meta, lead) => r ? `<div class="pick ${lead ? "lead" : ""}"><div class="eyebrow">${eb}</div><div class="name">${label(r)}</div><div class="meta mono">${meta(r)}</div><div class="meta">${MAKERS[r.maker]}</div></div>` : "";
   $("picks").innerHTML =
     card("Senin için 1 numara", top, r => `skor ${r.sc.toFixed(0)} · zeka ${Math.round(r.intel)} · $${r.cost?.toFixed(2) ?? "–"}`, true) +
-    card("En zeki erişimin", smart, r => `zeka ${Math.round(r.intel)} · $${r.cost?.toFixed(2) ?? "–"}/görev`) +
+    card("En zeki model", smart, r => `zeka ${Math.round(r.intel)} · $${r.cost?.toFixed(2) ?? "–"}/görev`) +
     card("Zeka 45+ içinde en ucuz", cheapGood, r => `zeka ${Math.round(r.intel)} · $${r.cost.toFixed(2)}/görev`) +
     card("Günlük iş için hafif", daily, r => `zeka ${Math.round(r.intel)} · ${r.time.toFixed(1)} dk · $${r.cost.toFixed(2)}`);
 }
@@ -519,13 +495,13 @@ function renderChart() {
   const X = c => L + (LOG(Math.max(c, xmin)) - LOG(xmin)) / (LOG(xmax) - LOG(xmin)) * (W - L - R);
   const Y = i => T + (1 - (i - ymin) / (ymax - ymin)) * (H - T - B);
   const inPool = new Set(pool().map(r => r.name + "|" + r.effort));
-  const pts = ROWS.filter(r => r.cost != null).map(view).map(r => ({ ...r, ok: accessible(r).length > 0 && inPool.has(r.name + "|" + r.effort) }));
+  const pts = ROWS.filter(r => r.cost != null).map(view).map(r => ({ ...r, ok: on(r) && inPool.has(r.name + "|" + r.effort) }));
   let g = "";
   [0.01, 0.1, 1, 10].forEach(v => { g += `<line x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${H - B}" stroke="var(--line-soft)"/><text x="${X(v)}" y="${H - B + 18}" text-anchor="middle" font-size="12" fill="var(--muted)" font-family="IBM Plex Mono, monospace">$${v}</text>`; });
   [0, 10, 20, 30, 40, 50, 60].forEach(v => { g += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line-soft)"/><text x="${L - 8}" y="${Y(v) + 4}" text-anchor="end" font-size="12" fill="var(--muted)" font-family="IBM Plex Mono, monospace">${v}</text>`; });
   g += `<text x="${(L + W - R) / 2}" y="${H - 8}" text-anchor="middle" font-size="12" fill="var(--muted)">Görev başı maliyet (log ölçek) →</text>`;
   g += `<text transform="translate(14 ${(T + H - B) / 2}) rotate(-90)" text-anchor="middle" font-size="12" fill="var(--muted)">Zeka skoru →</text>`;
-  // Efficiency frontier over accessible settings: each point beats everything cheaper on intelligence
+  // Efficiency frontier over the shown settings: each point beats everything cheaper on intelligence
   const front = []; let bestI = -1;
   pts.filter(p => p.ok).sort((a, b) => a.cost - b.cost || b.intel - a.intel).forEach(p => { if (p.intel > bestI) { front.push(p); bestI = p.intel; } });
   if (front.length > 1) g += `<polyline points="${front.map(p => X(p.cost) + "," + Y(p.intel)).join(" ")}" fill="none" stroke="var(--frontier)" stroke-width="1.5" stroke-dasharray="5 4"/>`;
@@ -540,10 +516,10 @@ function renderChart() {
   const tip = $("tip");
   svg.querySelectorAll("circle").forEach(c => {
     const p = pts[+c.dataset.i];
-    c.onmousemove = e => { tip.hidden = false; tip.innerHTML = `<b>${label(p)}</b><br>zeka ${Math.round(p.intel)} · $${p.cost.toFixed(2)}/görev${p.time ? " · " + p.time.toFixed(1) + " dk" : ""}<br>${p.ok ? accessible(p).map(a => SUBS[a.s].label).join(" · ") : accessible(p).length ? "seçili seviyelerin dışında" : "erişimin yok"}`; tip.style.left = Math.min(e.clientX + 12, innerWidth - 270) + "px"; tip.style.top = (e.clientY + 12) + "px"; };
+    c.onmousemove = e => { tip.hidden = false; tip.innerHTML = `<b>${label(p)}</b><br>zeka ${Math.round(p.intel)} · $${p.cost.toFixed(2)}/görev${p.time ? " · " + p.time.toFixed(1) + " dk" : ""}<br>${p.ok ? MAKERS[p.maker] : on(p) ? "seçili seviyelerin dışında" : "geliştirici seçili değil"}`; tip.style.left = Math.min(e.clientX + 12, innerWidth - 270) + "px"; tip.style.top = (e.clientY + 12) + "px"; };
     c.onmouseleave = () => tip.hidden = true;
   });
-  $("legend").innerHTML = Object.entries(MAKERS).map(([k, v]) => `<span><i class="dot" style="background:var(--c-${k})"></i>${v}</span>`).join("") + `<span><i class="dot" style="background:var(--off);opacity:.5"></i>Erişimin yok ya da seçili seviye dışı</span>`;
+  $("legend").innerHTML = Object.entries(MAKERS).map(([k, v]) => `<span><i class="dot" style="background:var(--c-${k})"></i>${v}</span>`).join("") + `<span><i class="dot" style="background:var(--off);opacity:.5"></i>Seçili değil ya da seviye dışı</span>`;
 }
 
 function update(rebuild) {
@@ -569,7 +545,7 @@ function renderCompare() {
     return `<div class="src"><div class="eyebrow">${s.date}</div><div class="name">${s.label}</div><p>${s.method}</p>
       <div class="rho"><span class="mono">${rho == null ? "–" : rho.toFixed(2)}</span><span>AA ile sıra uyumu: ${word}, ${n} ortak model</span></div></div>`;
   }).join("");
-  const okFam = n => FAMILIES.find(f => f.name === n).access.some(a => state.subs[a.s]?.on && state.subs[a.s].tier >= a.t);
+  const okFam = n => on(FAMILIES.find(f => f.name === n));
   const names = NAMES.filter(n => state.all || okFam(n)).sort((a, b) => (cons[b].med ?? -1) - (cons[a].med ?? -1));
   $("cmp-head").innerHTML = `<tr><th>Model</th>${m.sources.map(s => `<th class="num">${s.label}</th>`).join("")}<th>Bağımsız sıra</th><th>AA ile fark</th></tr>`;
   $("cmp-rows").innerHTML = names.map(n => {
@@ -587,7 +563,6 @@ function renderCompare() {
   }).join("");
 }
 document.getElementById("stamp").textContent = "Son kontrol: " + trDate(DATA.checked) + " · veri değişikliği: " + trDate(DATA.updated);
-document.getElementById("access-notes").textContent = DATA.accessNotes;
 document.getElementById("caveats").textContent = DATA.caveats;
 renderControls(); update();
 }

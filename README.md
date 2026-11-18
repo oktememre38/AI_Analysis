@@ -1,6 +1,6 @@
-# Abonelik Model Seçici
+# AI Model Seçici
 
-Claude, ChatGPT, Gemini, DeepSeek ve OpenCode Go aboneliklerindeki modelleri zeka, görev başı maliyet ve hıza göre sıralayan tek sayfalık araç. Artificial Analysis verisini LiveBench, LMArena ve Vals Index ile karşılaştırır.
+Anthropic, OpenAI, Google, DeepSeek ve diğer geliştiricilerin modellerini zeka, görev başı maliyet ve hıza göre sıralayan tek sayfalık araç; geliştiriciye göre filtrelenir. Artificial Analysis verisini LiveBench, LMArena ve Vals Index ile karşılaştırır.
 
 - `index.html`: sayfa. `data.json` dosyasını okur.
 - `data.json`: tüm veriler. Her sabah bulutta çalışan bir Claude görevi tarafından güncellenir.
